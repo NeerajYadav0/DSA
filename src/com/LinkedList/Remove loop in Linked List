@@ -1,0 +1,41 @@
+public static void removeLoop(Node head){
+         Node fast=head;
+       Node slow= head;
+       Node crr= head;
+       
+       
+          
+       while(fast!= null && fast.next!=null)
+       {  
+           fast=fast.next.next;
+           slow=slow.next;
+           if(fast==slow)
+           {
+               break;
+           }
+       }
+      
+       if(fast==slow)
+       {
+          
+           while(slow!=crr)
+           {
+               slow=slow.next;
+               crr=crr.next;
+               
+           }
+               Node temp=crr;
+               while(temp.next!=crr)
+               {
+                   temp=temp.next;
+                   
+               }
+              temp.next=null;
+               
+               
+           
+          
+       }
+      
+       
+    }
