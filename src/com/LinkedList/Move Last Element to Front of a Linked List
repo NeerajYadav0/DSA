@@ -1,0 +1,24 @@
+public static Node moveToFront(Node head) {
+        Node itt= head;
+        Node temp=null;
+        if(itt.next==null)
+        {
+            return head;
+        }
+        while(true)
+        {
+            if(itt.next.next==null)
+            {
+                temp=itt.next;
+                itt.next=null;
+                temp.next=head;
+                head=temp;
+                return head;
+            }
+            else 
+            {
+                itt=itt.next;
+            }
+        }
+        
+    }
