@@ -1,0 +1,32 @@
+public Node removeDuplicates(Node head) 
+    {
+            HashSet<Integer> set = new HashSet<>();
+            Node front= head;
+            if(front.next==null)
+            {
+                return front;
+            }
+            set.add(front.data);
+            while(front.next!=null)
+            {
+             if(set.contains(front.next.data))
+             {
+                 if(front.next.next==null)
+                 {
+                     front.next=null;
+                 }
+                 else
+                 {
+                front.next= front.next.next; 
+                 }
+             }
+             else 
+             {
+                 set.add(front.next.data);
+                 front=front.next;
+             }
+            }
+            return head;
+            
+            
+    }
