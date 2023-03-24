@@ -1,0 +1,24 @@
+Node removeDuplicates(Node head)
+    {
+    Node front=head;
+    Node next=head;
+   
+        while(true)
+        {  if(next.next==null)
+            {
+             return head;
+            }
+            next=front.next;
+            if(front.data==next.data)
+            {
+                front.next= next.next;
+            }
+            else
+            {
+                front=next;
+            }
+             
+            
+        }
+    
+    }
