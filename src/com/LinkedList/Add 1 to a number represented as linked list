@@ -1,0 +1,83 @@
+public static Node addOne(Node head) 
+    { 
+        int carry=0;
+        
+        Node pri=null;
+        Node next=head;
+        Node curr=head;
+        Boolean flag=false;
+        // if(head.next==null)
+        // {
+        //   int a = head.data;
+        //   a+=1;
+        //   if(a>9)
+        //   {
+        //       head.data=0;
+        //       Node temp= new Node(1);
+        //       head.next=temp;
+        //   }
+        //   else
+        //   {
+        //       head.data=a;
+        //   }
+        // }
+        // else
+        // {
+            while(curr!=null)
+            {
+            next=curr.next;
+            curr.next=pri;
+            pri=curr;
+            curr=next;
+            }
+            head=pri;
+            curr=head;
+            while(carry!=Integer.MAX_VALUE)
+            {
+                int a= curr.data;
+                if(!flag)
+                {
+                a=a+1 +carry ;
+                flag=true;
+                }
+                else
+                {
+                    a=a+carry ; 
+                }
+                if(a>9)
+                {
+                    carry=1;
+                    curr.data=0;
+                }else
+                {
+                    carry=Integer.MAX_VALUE;
+                    curr.data=a;
+                    break;
+                }
+                pri=curr;
+                curr=curr.next;
+                if(curr==null && carry!=0)
+                {
+                    Node temp= new Node(1);
+                    pri.next= temp;
+                    break;
+                }
+                
+                
+            }
+           
+        // }
+         next=head;
+            curr=head;
+            pri=null;
+             while(curr!=null)
+            {
+            next=curr.next;
+            curr.next=pri;
+            pri=curr;
+            curr=next;
+            }
+            head=pri;
+        return head;
+        
+    }
