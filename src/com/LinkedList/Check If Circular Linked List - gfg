@@ -1,0 +1,21 @@
+boolean isCircular(Node head)
+    {
+	 Node stay, move;
+	 stay=head; 
+	 move=head;
+	 if(head.next==null)
+	 {
+	     return false;
+	 }
+	 while(move!=null)
+	 {
+	     move = move.next;
+	     if(stay==move)
+	     {
+	         return true;
+	     }
+	     
+	     
+	 }
+	 return false;
+    }
