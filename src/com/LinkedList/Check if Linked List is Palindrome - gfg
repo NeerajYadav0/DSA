@@ -1,0 +1,64 @@
+boolean isPalindrome(Node head) 
+    {
+       int mid=0;
+       int count=0;
+       Node move= head;
+       while(move!=null)
+       {
+        count++;
+        move=move.next;
+        
+       }
+       move=head;
+       Node prev=null;
+       Node curr=head;
+       Node next=head;
+       count--;
+       Node temp=null;
+       mid= count/2;
+       Boolean flag= false;
+       for(int i=0;i<=count;i++)
+       {
+           if(i==mid)
+           {
+              
+               temp=curr;
+               
+           }else if(i>mid)
+           {
+               if(curr==null)
+               {
+                   break;
+               }
+              
+               next=curr.next;
+               curr.next=prev;
+               prev=curr;
+               curr=next;
+               continue;
+           }
+           
+           curr=curr.next;
+       }
+       temp.next=prev;
+       move=head;
+      
+     Node front, rare;
+     count++;
+     front=head;
+     rare= head;
+     for(int i=0;i<=mid;i++)
+     {
+         front=front.next;
+     }
+     while(front!=null)
+     {
+         if(front.data!=rare.data)
+         {
+             return false;
+         }
+         front=front.next;
+         rare=rare.next;
+     }
+     return true;
+    }    
