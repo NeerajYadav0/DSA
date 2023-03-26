@@ -1,0 +1,33 @@
+public ListNode middleNode(ListNode head) {
+        
+        ListNode temp= head;
+        int count=0;
+        while(temp!=null){
+            count++;
+            temp= temp.next;
+        }
+        int mid= count/2;
+        ListNode result= null;
+        for(int i=0;i<count;i++)
+        {
+            
+           if(i>=mid)
+           {
+               ListNode temp1= new ListNode(head.val);
+                if(result==null)
+                {
+                    temp=temp1;
+                    result=temp;
+                }
+                else 
+                { 
+                   
+                    temp.next=temp1;
+                    temp=temp.next;
+                    
+                }
+            }
+            head=head.next;
+        }
+        return result;
+    }
