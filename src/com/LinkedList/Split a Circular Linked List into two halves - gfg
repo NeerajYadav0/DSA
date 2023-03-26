@@ -1,0 +1,62 @@
+void splitList(circular_LinkedList list)
+    {
+        Node fix, move;
+        fix= list.head;
+        move= list.head;
+        int size=0;
+        while(move.next!=fix)
+        {
+
+            size++;
+            move=move.next;
+        }
+        
+        move = fix;
+        int mid= size/2;
+        boolean flag = false;
+        list.head1=null;
+        list.head2=null;
+        
+
+        for(int i=0;i<=size;i++)
+        {
+            if(i<=mid)
+            {   Node temp = new Node(list.head.data);
+
+                list.head= list.head.next;
+                if(list.head1==null)
+                {
+                    list.head1= temp;
+                    move = list.head1;
+                }
+                else
+                {
+                    move.next= temp;
+                    move= move.next;
+                }
+            }
+            else
+            {   move.next=list.head1;
+                Node temp = new Node(list.head.data);
+                list.head= list.head.next;
+
+                if(list.head2==null)
+                {
+                    list.head2= temp;
+                    move = list.head2;
+                    flag=true;
+                }
+                else
+                {
+                    move.next= temp;
+                    move= move.next;
+                }
+
+            }
+        }
+        if(flag)
+        {
+            move.next=list.head2;
+        }
+        
+    }
