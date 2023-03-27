@@ -1,0 +1,41 @@
+public static int findPairsWithGivenSum(int target, Node start,Node end) {
+        int count=0;
+        while(start!=end)
+        { int temp= start.data+ end.data;
+        if(temp== target)
+        {
+            count++;
+            start=start.next;
+        }
+        else if(temp>target)
+        {
+            end=end.prev;
+        }
+        else
+        {
+            start=start.next;
+        }
+            
+        }
+        return count;
+    }
+	public static int countAllTripletSum(Node head, int x) {
+		int count=0;
+        Node end=head;
+        if(head==null)
+        {
+return 0;}
+        while(end.next!=null)
+        { end= end.next;
+        }
+        for(Node current=head; current.next!=null;current= current.next)
+        {
+            Node first= current.next;
+            if(first!=end)
+            {
+                count+=findPairsWithGivenSum(x-current.data,first,end);
+}
+}
+        
+    return count;
+	}
