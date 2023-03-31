@@ -1,0 +1,57 @@
+public ArrayList<ArrayList<Integer>> fourSum(int[] arr, int k) {
+        ArrayList<ArrayList<Integer>> a = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> z = new ArrayList<>();
+        Arrays.sort(arr);
+        int length = arr.length;
+        for(int i=0;i<length;i++)
+        {
+            for(int j=i+1;j<length;j++)
+            {
+                int front= j+1;
+                int rare = length-1;
+
+                while(front<rare)
+                {
+                    if(front >= length || front== rare)
+                    {
+                        break;
+                    }
+                    int sum = arr[i] + arr[j] + arr[front] + arr[rare];
+                    if(sum>k)
+                    {
+                        rare--;
+
+                    }
+                    else if(sum<k)
+                    {
+                        front++;
+                    }
+                    else {
+                        ArrayList<Integer> b= new ArrayList<>();
+
+                        b.add(arr[i]);
+                        b.add(arr[j]);
+                        b.add(arr[front]);
+                        b.add(arr[rare]);
+                        front++;
+                        rare= length-1;
+
+                        z.add(b);
+
+
+                    }
+                }
+            }
+
+        }
+        for(ArrayList<Integer> j : z)
+        {
+            if(!a.contains(j))
+            {
+                a.add(j);
+            }
+        }
+
+
+        return a;
+    }
