@@ -1,0 +1,23 @@
+long countTriplets(long arr[], int n,int sum)
+    {
+    long a=0;
+        Arrays.sort(arr);
+     for(int i=0;i<n;i++)
+     {
+         int front= i+1;
+         int rare = n-1;
+         while(front<rare)
+         {
+             long temp= arr[front]+ arr[rare] + arr[i];
+             if(temp>=sum)
+             {
+                 rare--;
+             }
+             else {
+                 a+= rare- front;
+                 front++;
+             }
+         }
+     }
+      return a;
+    }
