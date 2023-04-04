@@ -1,0 +1,57 @@
+public static void swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i]= arr[j];
+        arr[j]= temp;
+
+    }
+    public static int minSwaps(int nums[])
+    {
+
+        int n = nums.length;
+        int[] temp= new int[n];
+        for(int i=0;i<n;i++)
+        {
+            temp[i]= nums[i];
+        }
+        Arrays.sort(temp);
+
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(temp[i]!=nums[i])
+            {
+                int low= 0;
+                int high= n-1;
+                int index=0;
+                while(low<=high)
+                {
+                    int mid= (high+low)/2;
+                    if(temp[mid]== nums[i])
+                    {
+
+                        index=mid;
+                        break;
+                    }
+                    else if(temp[mid]>nums[i])
+                    {
+                        high= mid-1;
+
+                    }
+                    else
+                    {
+                        low= mid+1;
+                    }
+
+                }
+
+                swap(nums,i,index);
+                count++;
+                i--;
+
+
+
+            }
+        }
+        return count;
+    }
