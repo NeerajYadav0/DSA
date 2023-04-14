@@ -1,0 +1,45 @@
+class Solution {
+
+    public void genCombi(String digits, String val, List<String> result, Map<String,String> nums)
+    {
+        int len = digits.length();
+        if(len==0)
+        {
+            result.add(val);
+            return;
+        }
+        int div = (int)Math.pow(10,len-1);
+        int temp = Integer.parseInt(digits);
+        int num =  temp/div;
+        digits= digits.substring(1,len);
+        String abc= nums.get(Integer.toString(num));
+
+        for(int i=0;i<abc.length();i++)
+        {
+            val+= abc.charAt(i);
+            genCombi(digits,val,result,nums);
+            val= val.substring(0,val.length()-1);
+        }
+        return;
+    }
+    public List<String> letterCombinations(String digits) {
+        Map<String,String> nums = new HashMap<>();
+        nums.put("2","abc");
+        nums.put("3","def");
+        nums.put("4","ghi");
+        nums.put("5","jkl");
+        nums.put("6","mno");
+        nums.put("7","pqrs");
+        nums.put("8","tuv");
+        nums.put("9","wxyz");
+
+        String val="";
+        List<String> result= new ArrayList<>();
+        if(digits.length()==0)
+        {
+            return result;
+        }
+        genCombi(digits,val,result,nums);
+        return result;
+    }
+}
