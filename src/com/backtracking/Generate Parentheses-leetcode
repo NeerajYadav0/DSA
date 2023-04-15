@@ -1,0 +1,28 @@
+class Solution {
+    public void Parenthesis(String a, int open, int closed, List<String> result)
+    {
+        if(open>0 && open <= closed)
+        {
+            a= a+"(";
+            Parenthesis(a,open-1,closed,result);
+            a=a.substring(0,a.length()-1);
+        }
+        if(closed>0 && closed>open)
+        {
+            a= a+")";
+            Parenthesis(a,open,closed-1,result);
+        }
+        if(open ==0 && closed ==0)
+        {
+            result.add(a);
+            return;
+        }
+        return ;
+    }
+
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        Parenthesis("",n,n,result);
+        return result;
+    }
+}
