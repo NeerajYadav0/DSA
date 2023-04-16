@@ -1,0 +1,83 @@
+class Solution {
+    public boolean isValid(int i, int j, int r , int c,boolean[][] check){
+        if(i>=0 && i<r && j>=0 && j<c && !check[i][j])
+        {
+            
+                return true;
+            
+        }
+        return false;
+    }
+    public void move(char[][]board, String word, boolean[][] check, boolean[] result, String value,int m ,int n, int k,int l){
+        
+                value+=board[k][l];
+                int len = value.length();
+                int wlen=word.length();
+                if(value.charAt(len-1)!= word.charAt(len-1) || len > wlen)
+                { 
+                    return;
+                }
+                if(len==wlen)
+                {
+                    
+                    result[0]=true;
+                    return;
+                }
+                if(isValid(k,l+1,m,n,check))
+                {
+                      
+                        check[k][l+1]=true;
+                        move(board,word,check,result,value,m,n,k,l+1);
+                        check[k][l+1]=false;
+                    
+                }
+                if(isValid(k+1,l,m,n,check))
+                {
+                       
+                        check[k+1][l]=true;
+                        move(board,word,check,result,value,m,n,k+1,l);
+                        check[k+1][l]=false;
+                    
+                }  
+                if(isValid(k,l-1,m,n,check))
+                {
+                     
+                        check[k][l-1]=true;
+                        move(board,word,check,result,value,m,n,k,l-1);
+                        check[k][l-1]=false;
+                    
+                }  
+                if(isValid(k-1,l,m,n,check))
+                {
+                   
+                        check[k-1][l]=true;
+                        move(board,word,check,result,value,m,n,k-1,l);
+                        check[k-1][l]=false;
+                    
+
+                } 
+                return;
+    }
+   
+    public boolean exist(char[][] board, String word) {
+        boolean[] result = new boolean[1];
+        
+        String value="";
+        int m = board.length;
+        int n = board[0].length;
+        if((m*n)< word.length())
+        {
+            return false;
+        }
+        boolean[][] check = new boolean[m][n];
+        for(int k=0;k<m;k++)
+        {
+            for(int l=0;l<n;l++)
+            {   check[k][l]=true;
+                move(board,word,check,result,value,m,n,k,l);
+                check[k][l]=false;
+            }
+        }
+        return result[0];
+    }
+}
