@@ -1,0 +1,80 @@
+class Solution {
+    public boolean isValid(int i, int j, int r , int c,boolean[][] check){
+        if(i>=0 && i<r && j>=0 && j<c && !check[i][j])
+        {
+            
+                return true;
+            
+        }
+        return false;
+    }
+
+    public void move(int[][]grid, List<Integer> result, boolean[][] check, int sum,int m ,int n, int k,int l){
+        
+               
+                
+                if(grid[k][l]==0)
+                { 
+                    result.set(0,Math.max(result.get(0),sum));
+                    return;
+                }
+                    sum+=grid[k][l];
+                if(isValid(k,l+1,m,n,check))
+                {
+                        check[k][l+1]=true;
+                        move(grid,result,check,sum,m,n,k,l+1);
+                        check[k][l+1]=false;
+                    
+                }
+                if(isValid(k+1,l,m,n,check))
+                {
+                       
+                        check[k+1][l]=true;
+                        move(grid,result,check,sum,m,n,k+1,l);
+                     
+                        check[k+1][l]=false;
+                    
+                }  
+                if(isValid(k,l-1,m,n,check))
+                {
+                     
+                        check[k][l-1]=true;
+                        move(grid,result,check,sum,m,n,k,l-1);
+                       
+                        check[k][l-1]=false;
+                    
+                }  
+                if(isValid(k-1,l,m,n,check))
+                {
+                   
+                        check[k-1][l]=true;
+                        move(grid,result,check,sum,m,n,k-1,l);
+                        
+                        check[k-1][l]=false;
+                    
+
+                } 
+                result.set(0,Math.max(result.get(0),sum));
+                return;
+    }
+   
+    public int getMaximumGold(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        List<Integer> result = new ArrayList<>();
+        result.add(0);
+        boolean[][] check = new boolean[m][n];
+        int sum =0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                check[i][j]=true;
+                move(grid,result,check,sum,m,n,i,j);
+                check[i][j]=false;
+            }
+        }
+        return result.get(0);
+
+    }
+}
