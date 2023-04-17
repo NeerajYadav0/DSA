@@ -1,0 +1,38 @@
+class Solution {
+    public void permutation (List<Integer> num,List<List<Integer>> result,List<Integer> temp){
+
+        int len = num.size();
+        if(len==0)
+        {
+            result.add(new ArrayList<>(temp));
+            return ;
+        }
+        for(int i=0;i<len;i++)
+        {
+            temp.add(num.get(i));
+            num.remove(i);
+            permutation(num,result,temp);
+            if(num.size()==0)
+            {
+                num.add(temp.get(temp.size()-1));
+                temp.remove(temp.size()-1);
+            }else{
+            num.add(i,temp.get(temp.size()-1));
+                temp.remove(temp.size()-1);
+                }
+        }
+        return ;
+
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        List<Integer> num= new ArrayList<>();
+        List<Integer> temp= new ArrayList<>();
+        List<List<Integer>> result= new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            num.add(nums[i]);
+        }
+        permutation(num,result,temp);
+        return result;
+    }
+}
