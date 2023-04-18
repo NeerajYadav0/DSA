@@ -1,0 +1,75 @@
+class Solution {
+    List<List<String>> list = new ArrayList<>();
+    public List<List<String>> solveNQueens(int n) {
+        char[][] matrix = new char[n][n];
+       
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                matrix[i][j] = '.';
+            }
+        }
+      
+        func(matrix, 0);
+        return list;
+    }
+    
+    
+    
+    public void func(char[][] matrix, int x){
+        //base case
+        if(x == matrix.length){ 
+            
+            ArrayList<String> ll = new ArrayList<>();
+            for(int i=0;i<matrix.length;i++){
+                String str = "";
+                for(int j=0;j<matrix[0].length;j++){
+                    if(matrix[i][j] == 'Q'){
+                        str+="Q";
+                    }
+                    else{
+                        str+=".";
+                    }
+                }
+                ll.add(str);
+            }
+            list.add(new ArrayList(ll));
+            return;
+        }
+        
+        //recursion call for all columns at a row
+        for(int i=0;i<matrix[0].length;i++){
+            if(isSafe(matrix, x, i)){    
+                matrix[x][i] = 'Q'; 
+                func(matrix, x+1);  
+                matrix[x][i] = '.'; 
+            }
+        }
+    }
+    
+
+    
+    public boolean isSafe(char[][] matrix, int x,int y){
+        //vertical
+        for(int i=x-1;i>=0;i--){
+            if(matrix[i][y] == 'Q'){
+                return false;
+            }
+        }
+        
+        //left diagonal
+        for(int i=x-1,j=y-1;i>=0 && j>=0 ; i--,j--){
+            if(matrix[i][j] == 'Q'){
+                return false;
+            }
+        }
+        
+        //right diagonal
+        for(int i=x-1,j=y+1;i >=0 && j < matrix[0].length; i--, j++){
+            if(matrix[i][j] == 'Q'){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+}
