@@ -1,0 +1,29 @@
+class Solution {
+    public void findSub(List<List<Integer>> result, List<Integer> temp, int[] nums, int len,int size)
+    {
+        if(len==size)
+        {
+            result.add(new ArrayList<>(temp));
+            if(temp.size()==0)
+            {
+                return;
+            }
+            temp.remove(temp.size()-1);
+            return;
+        }
+        
+        findSub(result,new ArrayList<>(temp),nums,len+1,size);
+        temp.add(nums[len]);
+        findSub(result,new ArrayList<>(temp),nums,len+1,size);
+    return;
+
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result= new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        int len=0;
+        int size = nums.length;
+        findSub(result,temp,nums,len,size);
+        return result;
+    }
+}
